@@ -1,0 +1,834 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Clase PHP :: motorPlantilla v2.x</title>
+<style type="text/css" media="screen">
+body { margin:0px;padding:0px;font-family:Trebuchet MS,verdana,arial,sans-serif;font-size:0.9em; }
+dl { padding:10px 0px 0px 30px; }
+dt { font-weight:600;color:#505050; }
+dd { padding-bottom:10px; }
+#contenido { width:960px;background:#e7ecf1;margin:0px auto; }
+#barratop { background:#13365c;color:#ffffff;padding:10px;font-size:1.5em;font-weight:bold; }
+#barrabot { background:#13365c;color:#ffffff;padding:10px;font-size:1.0em;text-align:center; }
+#acercade { padding:10px; background:#e5e5e5;color:#500000;text-align:center;font-size:0.8em; }
+#acercade h2 { margin:0px;padding:0px; }
+div.colizq { width:148px;float:left;font-size:1.2em;font-weight:bold;color:#13365c;text-align:right; }
+div.colder { width:810px;float:right;background:#f1f1f1; }
+div.colcon { padding:10px; }
+div.colsub { padding:0px 16px; }
+div.colsep { clear:both;}
+div.codigo { background:#ffffda;margin:10px;padding:20px;font-family:monospace; }
+div.codigo small { font-size:0.9em; font-weight:bold; color:#505050; }
+h3 { width:50%;color:#303030;font-size:1.05em;font-weight:bold;margin-bottom:5px;padding:5px 0px 0px 10px;border-left:1px dotted #808080;border-top:1px dotted #808080; }
+var { font-weight:bold;color:#009000;font-style:normal;font-family:monospace; }
+code { font-weight:bold;color:#000090;font-style:normal;font-family:monospace; }
+samp { font-weight:bold;color:#900000;font-style:normal;font-family:monospace; }
+.metodo { font-family:monospace; }
+.rojo { color:#a50000; }
+.verde { color:#008000; }
+.azul { color:#0000a5; }
+.gris { color:#808080; }
+</style>
+</head>
+<body>
+	<div id="contenido">
+	
+		<div id="barratop">PHP Clase: motorPlantilla v2.x</div>
+		
+		<div id="acercade">
+			<h2>SOBRE ESTE DOCUMENTO</h2>
+			<br />EL DOCUMENTO EN ESPAÑOL ES EL ÚNICO MANUAL DE REFERENCIA SOBRE EL FUNCIONAMIENTO DE LA CLASE
+			<br />LAS TRADUCCIONES DE ESTE MATERIAL ESTÁN AUTORIZADAS SIEMPRE QUE INCLUYAN ESTA NOTA Y SE DISTRIBUYAN JUNTO CON EL ORIGINAL
+		</div>
+		
+		<div class="colsep"></div>
+
+		<div id="toc">
+			<div class="colizq"><div class="colcon">Presentación</div></div>
+			<div class="colder"><div class="colcon">
+				<strong>motorPlantilla</strong> es una clase PHP que permite separar el código (PHP) de la representación y diseño (HTML/CSS), mediante el manejo de "plantillas" escritas en HTML, a las que se les añaden unas pocas y sencillas reglas.        
+				<h3>Características</h3>
+				<ul>
+					<li>Modelo de plantillas simple, basado en HTML, con definiciones de variables y bloques.</li>
+					<li>Carga automática de documentos, asignación de contenidos en tiempo de ejecución y definición de secciones fijas.</li>
+					<li>Salida HTML comprimida, para una carga más rápida de páginas en el navegador.</li>
+					<li>Fácil instalación, un solo archivo de clase y métodos sencillos.</li>
+          <li>Métodos en español.</li>
+				</ul>
+			</div></div>
+			<div class="colsep"></div>
+		</div>
+		
+		<div id="version">
+			<div class="colizq"><div class="colcon">Versión</div></div>
+			<div class="colder"><div class="colcon">
+				<big><strong>v2.1.1</strong></big> (2010-11)
+				<p><strong>Control de Versiones (CVS)</strong></p>
+        <dl>
+          <dt>V2.1.1</dt>
+          <dd>- 2010-11: corrige error al intentar asignación con un arreglo vacío.</dd>
+          <dt>v2.1</dt>
+          <dd>- 2009-05: método traducir()</dd>
+          <dt>V2.0.1</dt>
+          <dd>
+            - 2008-05: constantes globales: MT_GLOBAL, MT_RAIZ, MT_TPL, MT_HTML, MT_BODY
+            <br />
+            - 2008-03: implementa etiquetas para documentación DOCI - DOCF
+          </dd>
+          <dt>V2.0</dt>
+          <dd>- 2007-02: versión para PHP5 (nuevo modelo de objetos)</dd>
+          <dt>V1.0</dt>
+          <dd>
+            - 2005-07: manejo de HTML como plantilla
+            <br />
+            - 2005-05 : versión estable para distribución
+          </dd>
+          <dt>v0.2 (beta-2)</dt>
+          <dd>
+            - 2005-03 : funcionalidad para leer cuerpo (body) de HTML
+            <br />
+            - 2005-01 : corrige error de interpretación en matriz de construcción
+          </dd>
+          <dt>v0.1 (beta-1)</dt>
+          <dd>
+            - 2004-12 : añade constantes y hash de variables en bloques de asignación
+            <br />
+            - 2004-10 : corrige errores en bloques de asignación y añade compresión de salida
+            <br />
+            - 2004-09 : primera versión del motor
+          </dd>
+        </dl>
+			</div></div>
+			<div class="colsep"></div>
+		</div>
+		
+		<div id="distribucion">
+			<div class="colizq"><div class="colcon">Distribución</div></div>
+			<div class="colder"><div class="colcon">
+				Esta distribución de <strong>motorPlantilla</strong> se entrega en formato comprimido (ZIP, TAR o GZ) e incluye:
+				<h3>../motorPlantilla/</h3>
+				<div class="colsub">Directorio de clase y su documentación.</div>
+				<dl>
+					<dt>class.motorPlantilla.php</dt>
+					<dd>Clase motor de plantillas.</dd>
+					<dt>guia.motorPlantilla.html</dt>
+					<dd>Guía para la instalación y uso de la clase (español)</dd>
+					<dt>leeme.txt</dt>
+					<dd>Guía rápida (español)</dd>
+					<dt>licencia.txt</dt>
+					<dd>Licencia de distribución (español)</dd>
+				</dl>
+				<h3>../motorPlantilla/ejemplos/</h3>
+				<div class="colsub">Directorio de ejemplo.</div>
+				<dl>
+					<dt>ejemplo.php</dt>
+					<dd>Script principal de ejemplos.</dd>
+					<dt>ejemplo.tpl</dt>
+					<dd>Plantilla general de ejemplos.</dd>
+					<dt>inc.plantilla.tpl</dt>
+					<dd>Plantilla complementaria de ejemplo.</dd>
+					<dt>inc.documento.html</dt>
+					<dd>Documento complementario de ejemplo</dd>
+				</dl>
+				
+			</div></div>
+			<div class="colsep"></div>
+		</div>
+		
+		<div id="licencia">
+			<div class="colizq"><div class="colcon">Licencia</div></div>
+			<div class="colder"><div class="colcon">
+				<strong>motorPlantilla</strong> es software libre, puedes redistribuirlo y/o modificarlo bajo términos de la Licencia Pública General GNU publicada por la Fundación para el Software Libre, ya sea la versión 3 de la Licencia, o (a elección) cualquier versión posterior.
+				<p>Este programa se distribuye con la esperanza de que sea útil, pero SIN GARANTIA ALGUNA; ni siquiera la garantía implícita MERCANTIL o de APTITUD PARA UN PROPOSITO DETERMINADO. Consulta los detalles de la Licencia Pública General GNU para información detallada.</p>
+				<p>Deberías haber recibido una copia de la Licencia Pública General GNU junto con el programa, en caso contrario, consulta la licencia original en la página de la <a href="http://www.gnu.org/licenses/">Fundación para el Software Libre</a></p>
+			</div></div>
+			<div class="colsep"></div>
+		</div>
+		
+		<div id="instalacion">
+			<div class="colizq"><div class="colcon">Instalación</div></div>
+			<div class="colder"><div class="colcon">
+				Para instalar, solo copia el archivo <strong>class.motorPlantilla-2.1.1.php</strong> a un subdirectorio accesible de tu servidor. El resto de los archivos de la distribución no son necesarios.
+				<p>Para instalar los ejemplos incluídos en la distribución, copia los archivos del subdirectorio <strong>/ejemplos/</strong> en tu servidor. Luego edita el archivo "config.php" para ajustar la ruta de acceso de los ejemplos.</p>
+			</div></div>
+			<div class="colsep"></div>
+		</div>
+		
+		<div id="plantillas">
+			<div class="colizq"><div class="colcon">Plantillas</div></div>
+			<div class="colder"><div class="colcon">
+				Una plantilla es un documento HTML con reglas añadidas que permiten definir elementos variables para asignar contenidos dinámicamente. Con <strong>motorPlantilla</strong> puedes construir una plantilla para representar todas las secciones de un sitio web o puedes crear un conjunto de plantillas para mostrar secciones de manera diferente, distintas versiones del sitio, entre otras aplicaciones.
+				<p>Las plantillas se escriben en HTML e incorporan ciertas reglas para estructurar los contenidos variables. Por tratarse de un documento HTML, la plantilla puede contener código CSS o cualquier otro estándar para escribir documentos web. El motor añade funcionalidad a la plantilla a través de dos elementos: <strong>variables</strong> y <strong>bloques</strong>.</p>
+				
+        <h3>Variables</h3>
+				<div class="colsub">
+					Consisten en "nombres" encerrados entre llaves ( ejemplo: <var>{nombre_variable}</var> ), que el motor utilizará como referencia para reemplazarlos por algún contenido.
+					<p>Las variables pueden escribirse en cualquier parte dentro del documento HTML, inclusive dentro de parámetros de etiquetas.</p>
+					<p><strong>Ejemplo</strong></p>
+					<div class="codigo">
+						&lt;html&gt;
+						<br />&lt;head&gt;
+						<br />&lt;title&gt;<var>{titulo}</var>&lt;/title&gt;
+						<br />&lt;link href="<var>{estilo}</var>" rel="stylesheet" type="text/css" media="screen" /&gt;
+						<br />...
+						<br />&lt;/head&gt;
+						<br />&lt;body&gt;
+						<br />&lt;h2&gt;<var>{titulo}</var>&lt;/h2&gt;
+						<br />&lt;/body&gt;
+						<br />&lt;/html&gt;
+					</div>
+					En el ejemplo anterior:
+					<ol>
+						<li>
+							La variable <var>{titulo}</var> se ha definido en dos partes del documento: dentro de la etiqueta <code>&lt;title&gt;</code> de la sección de cabecera y dentro de una etiqueta de titular <code>&lt;h2&gt;</code>
+							<br />Si se tienen varias secciones en el sitio web, con esta variable se puede mostrar el título correspondiente a cada sección.
+						</li>
+						<li>
+							El valor de la variable <var>{estilo}</var> indicará la hoja de estilos a utilizar. De igual manera, puede cambiarse la hoja de estilos en cada sección del sitio web.
+						</li>
+					</ol>
+					<p>Para asignar valores a las variables definidas en la plantilla, se utiliza el método <samp>asignar()</samp></p>
+				</div>
+        
+				<h3>Bloques</h3>
+				<div class="colsub">
+					Los bloques reservan secciones dentro del documento para mostrar grandes cantidades de información. Las variables también sirven para ésto, pero los bloques son los que relamente permiten la separación de código y contenido.
+					<p>Los bloques se escriben utilizando palabras claves definidas por el motor, encerradas entre comentarios HTML. <strong>motorPlantilla</strong> define tres tipos de bloque:</p>
+					<dl>
+						<dt>Bloque de Inclusión</dt>
+						<dd>
+							Para incluir o insertar automáticamente un documento u otra plantilla (ver <strong>Plantillas Anidadas</strong> más abajo).
+							<br />Su sintaxis es:
+							<p><code>&lt;!-- BINC : <var>documento</var> --&gt;</code></p>
+							<var>documento</var> es la ruta y nombre del archivo de documento a incluir.
+						</dd>
+						<dt>Bloque de Asignación</dt>
+						<dd>
+							Similar a una variable, permite asignar grandes cantidades de contenido para mostrarlo en la plantilla actual. Este contenido suele generarse dinámicamente.
+							<br />Su sintaxis es:
+							<p><code>&lt;!-- BASG : <var>identificador</var> --&gt;</code></p>
+							<var>identificador</var> es un nombre único asignado al bloque que se utilizará como referencia.
+						</dd>
+						<dt>Bloque Fijo</dt>
+						<dd>
+							Define un bloque de contenido fijo dentro de la plantilla que queda oculto y opcionalmente puede ser mostrado repetidamente.
+							<br />Su sintaxis es:
+							<p>
+								<code>&lt;!-- BINI : <var>identificador</var> --&gt;</code>
+								<br />...
+								<br />( contenido HTML )
+								<br />...
+								<br /><code>&lt;!-- BFIN : <var>identificador</var> --&gt;</code>
+							</p>
+							<var>identificador</var> es un nombre único asignado al bloque que se utilizará como referencia.
+						</dd>
+					</dl>
+					<p><strong>Ejemplo</strong></p>
+					<div class="codigo">
+						&lt;html&gt;
+						<br />&lt;head&gt;
+						<br />&lt;title&gt;<strong class="gris">{titulo}</strong>>&lt;/title&gt;
+						<br />&lt;link href="<strong class="gris">{estilo}</strong>" rel="stylesheet" type="text/css" media="screen" /&gt;
+						<p><code>&lt;!-- BINC : <var>metadatos.html</var> --&gt;</code></p>
+						&lt;/head&gt;
+						<br />&lt;body&gt;
+						<br />&lt;h2&gt;<strong class="gris">{titulo}</strong>&lt;/h2&gt;
+						<p><code>&lt;!-- BASG : <var>contenido</var> --&gt;</code></p>
+						<p>
+							<code>&lt;!-- BINI : <var>seccion</var> --&gt;</code>
+							<br />Ejemplo de contenido oculto ...
+							<br /><code>&lt;!-- BFIN : <var>seccion</var> --&gt;</code>
+						</p>
+						<br />&lt;/body&gt;
+						<br />&lt;/html&gt;
+					</div>
+					En el ejemplo anterior:
+					<ol>
+						<li>El bloque de inclusión ( <code>BINC</code> ) en la cabecera, incluye el documento "metadatos.html" en esa sección. El motor realiza esta acción de manera automática.</li>
+						<li>El bloque de asignación ( <code>BASG</code> ) identificado como <var>contenido</var>, será sustituído por un contenido dinámico utilizando el método <samp>cargar()</samp>. Cabe destacar que los bloques de asignación puede utilizarse varias veces durante una misma ejecución, es decir, puede emplerase en método <samp>cargar()</samp> sobre un bloque de asignación, tantas veces como sean necesarias.</li>
+						<li>El bloque fijo ( <code>BINI</code> ... <code>BFIN</code> ) identificado como <var>seccion</var> no se mostrará a menos que se llame al método <samp>usar()</samp>, con el que puede mostrarse tantas veces como sea necesario.</li>
+					</ol>
+				</div>
+				
+				<br />
+				<h3>Bloques Anidados</h3>
+				<div class="colsub">
+					Los <strong>bloques fijos</strong> pueden contener otros bloques fijos (de inclusión, de asignación o fijos) Aunque no existe un límite de anidamiento, no es recomendable anidar bloques de más de tres niveles.
+					<p>Los bloques anidados (bloques dentro de bloques) son visibles solo cuando el bloque contenedor está activo. El siguiente ejemplo explica el funcionamiento de los bloques anidados.</p>
+					<p><strong>Ejemplo</strong></p>
+					<div class="codigo">
+						&lt;html&gt;
+						<br />...
+						<p>
+							<code>&lt;!-- BINI : <var>bloque1</var> --&gt;</code>
+							<p>
+								&nbsp;&nbsp;&nbsp;<code>&lt;!-- BINI : <var>bloque2</var> --&gt;</code>
+								<br />...
+								<p>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>&lt;!-- BASG : <var>contenido</var> --&gt;</code>
+								</p>
+								...
+								<br />&nbsp;&nbsp;&nbsp;<code>&lt;!-- BFIN : <var>bloque2</var> --&gt;</code>
+							</p>
+							<p><code>&lt;!-- BFIN : <var>bloque1</var> --&gt;</code></p>
+						</p>
+						<p>...</p>
+					</div>
+					En el ejemplo anterior:
+					<ol>
+						<li>
+							El bloque fijo <var>bloque1</var> contiene otro bloque fijo llamado <var>bloque2</var> que, a su vez, tiene el bloque de asignación <var>contenido</var>.
+						</li>
+						<li>
+							El <var>bloque1</var> mantiene "invisible" todo lo que se enuentre dentro de él. Solo cuando se utiliza un bloque (método <samp>usar()</samp>), se activa su contenido, en este caso <var>bloque2</var>, que deberá también utilizarse paara acceder al bloque de asignación <var>contenido</var>.
+						</li>
+						<li>
+							Debido a que pueden mantenerse varios bloques fijos en uso y en diferentes niveles, la clase ofrece el método <samp>ira()</samp> para facilitar el desplazamiento entre bloques fijos.
+						</li>
+					</ol>
+					<p>Para asignar valores a las variables definidas en la plantilla, se utiliza el método <samp>asignar()</samp></p>
+				</div>
+				
+				<br />
+				<h3>Plantillas Anidadas</h3>
+				<div class="colsub">
+					El anidamiento de bloques ofrece un método práctico para anidar contenidos. Por ejemplo, pueden crearse bloques fijos con diferentes esquemas que permaneceran ocultos hasta su uso. Sin embargo, la clase ofrece también otro mecanismo de anidamiento por inclusión y asignación.
+					<p>El contenido de un documento incluído por un bloque de inclusión o el de una cadena asignada por un bloque de asignación, puede contener reglas de plantilla que serán interpretadas de la misma forma que en una plantilla normal.</p>
+					<p>Algunas ideas para el empleo de estas técnicas son:</p>
+					<ul>
+						<li>Ofrecer diferentes esquemas de representación mediante "pieles" que pueden ser elegidas (y construídas) por el usuario.</li>
+						<li>Ofrecer diferentes representaciones de un documento o página según parámetros de navegación, preferencias, condiciones de uso, etc.</li>
+						<li>Generar formularios u otras interfaces de usuario, en forma dinámica y adecuadas a condiciones variables.</li>
+					</ul>
+				</div>
+        
+				<br />
+				<h3>Literales para Traducción</h3>
+				<div class="colsub">
+          La versión <strong>2.1</strong> del motor incorpora un método sencillo para la traducción de plantillas en tiempo de ejecución. Las cadenas de texto constantes dentro de una plantilla pueden ser identificadas para ser reemplazadas por sus equivalentes en otros idiomas, con solo invocar al nuevo método <samp>traducir()</samp> antes de mostrar los resultados.
+					<p>Las cadenas a ser traducidas se encierran entre corchetes ( ejemplo: <var>[Cadena a traducir]</var> ) para convertirlas en literales susceptibles de traducción al ser comparadas con una lista (arreglo) de equivalencias.</p>
+					<p><strong>Ejemplo</strong></p>
+					<div class="codigo">
+						&lt;html&gt;
+						<br />&lt;head&gt;
+						<br />&lt;title&gt;<var>{titulo}</var>&lt;/title&gt;
+						<br />&lt;link href="<var>{estilo}</var>" rel="stylesheet" type="text/css" media="screen" /&gt;
+						<br />...
+						<br />&lt;/head&gt;
+						<br />&lt;body&gt;
+						<br />&lt;h2&gt;<var>[Titular de Ejemplo]</var>&lt;/h2&gt;
+						<br />&lt;/body&gt;
+						<br />&lt;/html&gt;
+					</div>
+          En este ejemplo, la cadena <var>[Titular de Ejemplo]</var> podrá ser reemplazada por su equivalente en otro idioma si se invoca al método <samp>traducir()</samp>. Si no se utiliza el método <samp>traducir()</samp> o no se halla una cadena equivalente para traducirla, la cadena no se reemplaza. En cualquier caso, los corchetes son eliminados del resultado final.
+				</div>
+				
+			</div></div>
+			<div class="colsep"></div>
+		</div>
+		
+		<div id="metodos">
+			<div class="colizq"><div class="colcon">Métodos</div></div>
+			<div class="colder"><div class="colcon">
+			<strong>motorPlantilla</strong> es una clase sencilla que emplea pocos métodos para manejar una plantilla y generar contenidos dinamicos.
+			<p>En general, el uso de la clase lleva el siguiente orden:</p>
+			<ol>
+				<li>Incluir la clase en el script con la instrucción <samp>include()</samp> (también puede usarse <samp>require()</samp> pero se aconseja la anterior)</li>
+				<li>Crear el objeto plantilla (instancia de clase). Para ello se utiliza la instrucción <samp>new</samp></li>
+				<li>Usar o insertar contenidos en la plantilla:
+					<ul>
+						<li><samp>usar()</samp> Usar un bloque predefinido.</li>
+						<li><samp>cargar()</samp> Cargar el contenido de un documento en un bloque.</li>
+						<li><samp>asignar()</samp> Asignar valores a variables.</li>
+						<li><samp>ira()</samp> Desplazarse entre bloques.</li>
+					</ul>
+				</li>
+				<li>Mostrar u obtener el documento generado por el motor:
+					<ul>
+            <li><samp>traducir()</samp> Para traducir los literales de la plantilla.</li>
+						<li><samp>mostrar()</samp> Para mostrar el documento final en el explorador.</li>
+						<li><samp>obtener()</samp> Para devolver una cadena de caracteres con el documento final y utilizarla posteriormente para otros efectos.</li>
+					</ul>
+				</li>
+			</ol>
+			
+			<br />
+			<h3>Instancia (new)</h3>
+			<div class="colsub">
+				Crea una instancia de la clase.
+				<p><span class="metodo">objeto <samp>new motorPlantilla</samp>(<var>plantilla</var>)</span></p>
+				<dl>
+					<dt>plantilla</dt>
+					<dd>Archivo de plantilla, incluyendo su ruta de acceso. Este archivo puede ser un documento de plantilla o un documento HTML que será iterpretado como una plantilla.</dd>
+				</dl>
+				<p>Antes de utilizar cualquier método, primero debe crearse una instancia de la clase (objeto) <strong>motorPlantilla</strong></p>
+				<div class="codigo">
+					&lt;?php
+					<br />...
+					<br /><small>// incluir el script de la clase</small>
+					<br />require_once('class.motorPlantilla_v20.php');
+					<br />..
+					<br /><small>// crear el objeto (instancia)</small>
+					<br /><code>$objMT = new motorPlantilla('miplantilla.tpl');</code>
+					<br />..
+					<br />?&gt;
+				</div>
+        <strong class="rojo">Nota:</strong>
+        <br />Por convención, se utiliza a extensión <strong>.tpl</strong> (template) para nombrar a los archivos de plantilla, pero esto no es obligatorio.
+			</div>
+			
+			<br />
+			<h3>usar()</h3>
+			<div class="colsub">
+				Usa un bloque fijo.
+				<p><span class="metodo">void <samp>usar</samp>(<var>id_bloque</var> [, <var>hash_variables</var>])</span></p>
+				<dl>
+					<dt>id_bloque</dt>
+					<dd>
+						Identificador (nombre) de un bloque fijo a usar. Los bloques fijos son del tipo:
+						<br /><code>&lt;!-- BINI : identificador --&gt;</code>
+						<br />... ( contenido ) ...
+						<br /><code>&lt;!-- BFIN : identificador --&gt;</code>
+						<p>No puede utilizarse otro tipo de bloques con este método.</p>
+					</dd>
+					<dt>hash_variables (opcional)</dt>
+					<dd>Si el bloque contiene variables definidas ( <var>{variable}</var> ) puede incluirse un arreglo asociativo (hash) para asignar sus valores.</dd>
+				</dl>
+				<strong>Ejemplos</strong>
+				<div class="codigo">
+					&lt;?php
+					<br />...
+					<br /><small>// usar un bloque</small>
+					<br />$objMT-><code>usar(<var>'mibloque'</var>);</code>
+					<br />..
+					<br /><small>// usar un bloque y asignar valores a variables del bloque</small>
+					<br />$objMT-><code>usar(<var>'mibloque'</var> , <var>{'variable1'=>'valor1','variable2'=>'valor2'}</var>);</code>
+					<br />..
+					<br /><small>// otra forma de asignar valores</small>
+					<br />$variables = { 'variable1'=>'valor1', 'variable2'=>'valor2' };
+					<br />$objMT-><code>usar(<var>'mibloque'</var> , <var>$variables</var>);</code>
+					<br />..
+					<br />?&gt;
+				</div>
+			</div>
+			
+			<br />
+			<h3>ira()</h3>
+			<div class="colsub">
+				Desplaza el puntero interno hacia un bloque en uso.
+				<p><span class="metodo">void <samp>ira</samp>([<var>id_bloque</var>])</span></p>
+				<dl>
+					<dt>id_bloque (opcional)</dt>
+					<dd>
+						Identificador (nombre) de un bloque en uso. Debe referirse a un bloque fijo. Si se omite el puntero se ubicará en la raíz del documento (o bloque raíz)
+					</dd>
+				</dl>
+				<strong>Ejemplos</strong>
+				<div class="codigo">
+					&lt;?php
+					<br />...
+					<br /><small>// usar bloques</small>
+					<br />$objMT-><code>usar(<var>'bloque1'</var>);</code>
+					<br />$objMT-><code>usar(<var>'bloque2'</var>);</code>
+					<br />..
+					<br /><small>// mover el puntero</small>
+					<br />$objMT-><code>ira(<var>'bloque1'</var>);</code>
+					<br />.. (hacer algo con el bloque1)
+					<br />$objMT-><code>ira(<var>'bloque2'</var>);</code>
+					<br />.. (hacer algo con el bloque2)
+					<br />..
+					<br /><small>// mover el puntero a la raíz</small>
+					<br />$objMT-><code>ira();</code>
+					<br />..
+					<br />?&gt;
+				</div>
+			</div>
+			
+			<br />
+			<h3>cargar()</h3>
+			<div class="colsub">
+				Carga un documento, plantilla o código HTML y lo asigna a un bloque.
+				<p><span class="metodo">void <samp>cargar</samp>(<var>id_bloque</var> , <var>contenido</var> [, <var>tipo_contenido</var> ])</span></p>
+				<dl>
+					<dt>id_bloque</dt>
+					<dd>
+						Identificador (nombre) de un bloque de asignación (del tipo <code>BASG</code>)
+					</dd>
+					<dt>contenido</dt>
+					<dd>
+						Contenido a cargar, con el que se reemplazará al bloque. Este puede ser:
+						<ul>
+							<li>Un archivo: bien sea otra plantilla o un documento HTML. En tal caso se debe especificar la ruta, nombre y extensión.</li>
+							<li>Una cadena: conteniendo código HTML y/o reglas del motor de plantilla (definiciones de variables y bloques)</li>
+						</ul>
+					</dd>
+					<dt>tipo_contenido (opcional)</dt>
+					<dd>
+						Valor numérico que indica el tipo de contenido que se cargará. De manera predeterminara el motor asume que el contenido es HTML puro, es decir, sin reglas para plantillas, pero puede indicarse que dicho contenido se utilizará como plantilla. Los posibles valores son:
+						<ul>
+							<br />
+							<li>
+								<strong>2</strong> (predeterminado) ( puede sustituirse por la constante <var>MT_BODY</var> )
+								<br />El contenido es HTML puro y se cargará solo lo que se encuentre dentro de la sección <code>body</code>.
+								<br />Si el documento no tiene una sección <code>body</code>, se cargará completo.
+							</li>
+							<br />
+							<li>
+								<strong>1</strong> ( puede sustituirse por la constante <var>MT_HTML</var> )
+								<br />El contenido es HTML puro y se cargará el documento completo (poco recomendado)
+							</li>
+							<br />
+							<li>
+								<strong>0</strong> ( puede sustituirse por la constante <var>MT_TPL</var> )
+								<br />El contenido incluye reglas de plantilla que luego podrán utilizarse para gestionar otros contenidos.
+							</li>
+						</ul>
+					</dd>
+				</dl>
+				<strong>Ejemplos</strong>
+				<div class="codigo">
+					&lt;?php
+					<br />...
+					<br /><small>// carga la sección &lt;body&gt; de un documento HTML (predeterminado)</small>
+					<br />$objMT-><code>cargar(<var>'bloqueX1'</var> , <var>'/html/documento.html'</var>);</code>
+					<br />..
+					<br /><small>// carga HTML directo pasado a través de una variable cadena</small>
+					<br />$enlace = '&lt;a href="#seccion"&gt;Ver más...&lt;/a&gt;';
+					<br />$objMT-><code>cargar(<var>'bloqueX1'</var> , <var>$enlace</var>);</code>
+					<br />..
+					<br /><small>// carga un documento HTML completo</small>
+					<br />$objMT-><code>cargar(<var>'bloqueX2'</var> , <var>'/html/informe.html'</var> , <var>1</var>);</code>
+					<br />..
+					<br /><small>// carga una plantilla (usa constante para tipo de contenido)</small>
+					<br />$objMT-><code>cargar(<var>'bloqueX3'</var> , <var>'tpl/plantilla2.tpl'</var> , <var>MT_TPL</var>);</code>
+					<br />..
+					<br />?&gt;
+				</div>
+			</div>
+			
+			<br />
+			<h3>asignar()</h3>
+			<div class="colsub">
+				Asigna valores a variables definidas en la plantilla.
+				<p><span class="metodo">void <samp>asignar</samp>(<var>hash_variables</var> [, <var>id_bloque</var> | <var>'_MTRAIZ_'</var> | <var>'_MTGLOB_'</var>])</span></p>
+				<dl>
+					<dt>hash_variables</dt>
+					<dd>
+						Arreglo asociativo (hash) con los pares variable=>valor a asignar.
+					</dd>
+					<dt>id_bloque (opcional)</dt>
+					<dd>Identificador del bloque dónde están las variables a asignar. De manera predeterminada se hace referencia al bloque activo actualmente, es decir, el último que se halla usado ( <code>usar()</code> ), cargado ( <code>cargar()</code> ) o activado ( <code>ira()</code> )</dd>
+					<dt>_MTRAIZ_</dt>
+					<dd>Si utiliza la palabra reservada <var>'_MTRAIZ_'</var> o su constante equivalente <samp>MT_RAIZ</samp>, se asignarán los valores de las variables que se encuentren definidas en la raíz del documento (no las de los bloques)</dd>
+					<dt>_MTGLOB_</dt>
+					<dd>La palabra reservada <var>'_MTGLOB_'</var> o su constante equivalente <samp>MT_GLOBAL</samp>, permite revisar y reemplazar todas las variables definidas, tanto en la raíz como en los bloques.</dd>
+				</dl>
+				<p>
+					<strong class="rojo">Importante</strong>
+					<br />Antes de generar el documento final, el motor realiza una revisión global para eliminar las variables sin valores asignados. De esta manera se asegura una salida HTML final sin contenidos extraños resultado de variables no reemplazadas. Esto también significa que no se generarán errores por dejar de asignar valores a las variables.
+				</p>
+				<strong>Ejemplos</strong>
+				<div class="codigo">
+					&lt;?php
+					<br />...
+					<br /><small>// usar un bloque y asignar valores a sus variables</small>
+					<br />$variables = {'var1'=>'Valor 1', 'var2'=>'Valor 2'};
+					<br />$objMT-><code>usar(<var>'bloque1'</var>);</code>
+					<br />$objMT-><code>asignar(<var>$variables</var>);</code>
+					<br />..
+					<br /><small>// asignar valores a variables de un bloque existente</small>
+					<br />$objMT-><code>asignar(<var>$variables</var>, <var>'mibloque'</var>);</code>
+					<br />..
+					<br /><small>// asignar valores a las variables de la raíz</small>
+					<br />$enraiz = {'raiz1'=>'Valor 1', 'raiz2'=>'Valor 2'};
+					<br />$objMT-><code>asignar(<var>$enraiz</var>, <var>'_MTRAIZ_'</var>);</code>
+					<br />..
+					<br /><small>// mover el puntero a la raiz y asignar valores a sus variables</small>
+					<br />$objMT-><code>ira();</code>
+					<br />$objMT-><code>asignar(<var>$enraiz</var>);</code>
+					<br />..
+					<br /><small>// asignación global de valores a las variables coincidentes en el documento</small>
+					<br />$todas = {'raiz1'=>'Valor 1', 'raiz2'=>'Valor 2', 'var1'=>'Valor 3', 'var2'='Valor 4'};
+					<br />$objMT-><code>asignar(<var>$todas</var>, <var>'_MTGLOB_');</code>
+					<br />..
+					<br />?&gt;
+				</div>
+			</div>
+      
+			<br />
+			<h3>traducir()</h3>
+			<div class="colsub">
+				Traducción o reemplazo de literales del documento.
+				<p><span class="metodo">void <samp>traducir</samp>(<var>id_idioma</var>)</span></p>
+				<dl>
+					<dt>id_idioma</dt>
+					<dd>
+						Identificador de idioma. El motor intentará cargar un arreglo (hash) para la traducción, definido dentro del archivo <code>id_idioma.php</code> o <code>i18n/id_idioma.php</code> (recomendado), ubicado en el mismo directorio desde el cual se cargó la plantilla principal al crear la instancia.
+					</dd>
+        </dl>
+				<strong>Ejemplo</strong>
+				<div class="codigo">
+					&lt;?php
+					<br />...
+					<br /><small>// traducir una plantilla al inglés</small>
+					<br />$objMT-><code>traducir( <var>'en'</var> );</code>
+					<br />..
+					<br />?&gt;
+				</div>
+        En este ejemplo, el motor intentará localizar el archivo <code>en.php</code> o <code>i18n/en.php</code> el cual deberá devolver un arreglo asociativo cuyas claves coincidan con el idioma original y el contenido con el equivalente en el idioma al que se desea traducir.
+        <p><strong>Ejemplo</strong> (archivo de traducción)</p>
+				<div class="codigo">
+					&lt;?php
+					<br />/*
+          <br />&nbsp;* en.php
+          <br />&nbsp;* versión inglesa de plantilla
+          <br />&nbsp;*/
+          <br />&nbsp;
+          <br /><code>return array(</code>
+          <br /><var>'Acerca de Nosotros'</var> <code>=&gt;</code> <var>'About Us'</var>,
+          <br /><var>'Servicios'</var> <code>=&gt;</code> <var>'Services'</var>,
+          <br /><var>'Productos'</var> <code>=&gt;</code> <var>'Products'</var>,
+          <br /><var>'Contacto'</var> <code>=&gt;</code> <var>'Contact'</var>,
+          <br /><var>'Bienvenido a nuestro sitio web'</var> <code>=&gt;</code> <var>'Welcome to our website'</var>,
+          <br /><code>);</code>
+          <br />&nbsp;
+          <br />?&gt;
+				</div>
+			</div>
+			
+			<br />
+			<h3>mostrar()</h3>
+			<div class="colsub">
+				Procesa la plantilla y muestra su resultados.
+				<p><span class="metodo">void <samp>mostrar</samp>()</span></p>
+				<p>Este método no tiene argumentos y realiza las siguientes acciones:</p>
+				<ol>
+					<li>Elimina de la plantilla los bloques y variables no utilizados o asignados.</li>
+          <li>Revisa y normaliza los literales no traducidos.</li>
+					<li>Envía un documento comprimido al navegador.</li>
+					<li>Inicializa los arreglos utilizados en la construcción del documento para liberar memoria.</li>
+				</ol>
+				<strong>Ejemplo</strong>
+				<div class="codigo">
+					&lt;?php
+					<br />...
+					<br /><small>// mostrar documento HTML final</small>
+					<br />$objMT-><code>mostrar();</code>
+					<br />..
+					<br />?&gt;
+				</div>
+			</div>
+			
+			<br />
+			<h3>obtener()</h3>
+			<div class="colsub">
+				Procesa la plantilla y devuelve una cadena comprimida con el documento HTML resultante.
+				<p><span class="metodo">cadena <samp>obtener</samp>()</span></p>
+				<p>Este método no tiene argumentos y hace lo mismo que el método <code>mostrar()</code> salvo que en lugar de enviar el resultado HTML al navegador, lo devuelve como una cadena.</p>
+				<strong>Ejemplo</strong>
+				<div class="codigo">
+					&lt;?php
+					<br />...
+					<br /><small>// obtener una cadena del documento HTML final</small>
+					<br />$salida = $objMT-><code>obtener();</code>
+					<br />..
+					<br />.. ( procesar la cadena según necesidades )
+					<br />..
+					<br />?&gt;
+				</div>
+			</div>
+			
+			<br />
+			<h3>tiempo()</h3>
+			<div class="colsub">
+				Devuelve el tiempo de ejecución del motor en milisegundos.
+				<p><span class="metodo">flotante <samp>tiempo</samp>()</span></p>
+				<p>Este método puede emplearse en cualquier momento para conocer cuánto demora el motor en procesar una plantilla o parte de ella.</p>
+				<p>
+					<strong class="rojo">Importante</strong>
+					<br />El tiempo inicial se determina al momento de crear el objeto (instancia) y siempre se utiliza como referencia para calcular el tiempo transcurrido. Es decir, si se evalúa el tiempo en varias etapas, siempre se tomará el mismo valor inicial.
+				</p>
+				<p>
+					Para evaluar el tiempo total que demoró el motor en generar el documento final, use el método inmediatamente después de mostrar u obtener los resultados.
+				</p>
+				<strong>Ejemplos</strong>
+				<div class="codigo">
+					&lt;?php
+					<br />...
+					<br /><small>// obtener tiempo en milisegundos</small>
+					<br />$tiempo = $objMT-><code>tiempo();</code>
+					<br />..
+					<br />.. ( procesar o evaluar según necesidades )
+					<br />..
+					<br /><small>// tiempo que demora en generarse el documento final</small>
+					<br />$plantilla = <code>new motorPlantilla(<var>'miplantilla.tpl'</var>)</code>;
+					<br />..
+					<br />.. (uso de bloques, asignaciones y otros procesos)
+					<br />..
+					<br />$plantilla-><code>mostrar();</code>
+					<br />..
+					<br />$tiempoTotal = $objMT-><code>tiempo();</code>
+					<br />..
+					<br />?&gt;
+				</div>
+			</div>
+			
+			</div></div>
+			<div class="colsep"></div>
+		</div>
+		
+		<div id="errores">
+			<div class="colizq"><div class="colcon">Mensajes de error</div></div>
+			<div class="colder"><div class="colcon">
+				La ejecución de <strong>motorPlantilla</strong> se interrumpirá si ocurre un error. Si el error es detectado por el motor, se mostrará un mensaje con el siguiente formato:
+				<p>
+					<div style="text-align:center">
+						<strong>ERROR</strong> al ejecutar <strong style="color:#ff0000;font-style:italic;">método/función que generó el error</strong> - <strong style="color:#0000ff;font-style:italic;">número de error</strong>
+						<br /><span style="color:#808080;font-style:italic;">descripción del error</span>
+					</div>
+				</p>
+				<p>A continuación se describen los mensajes de error emitidos por la clase y las acciones que debes tomar para corregirlos:</p>
+				<dl>
+					<dt>motorPlantilla()<br />Se requiere plantilla o documento a utilizar</dt>
+					<dd>
+						Falta argumento al instanciar la clase o la plantilla/documento especificado no existe.
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Escriba un nombre de archivo de plantilla o documento existente al instanciar el objeto.
+						</dd>
+					</dd>
+					<dt>usar()<br />No se especificó nombre del bloque a usar.</dt>
+					<dd>
+						No se especificó el nombre del bloque que se desea utilizar.
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Debe especificar un nombre de bloque como argumento del método <code>usar()</code>
+						</dd>
+					</dd>
+					<dt>usar()<br />No puede usarse el bloque raíz.</dt>
+					<dd>
+						El bloque raíz '_MTRAIZ_' es para uso interno. Se intentó usar el bloque raíz pasando su nombre como argumento.
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Utilice otro bloque diferente a <var>_MTRAIZ_</var>
+						</dd>
+					</dd>
+					<dt>usar()<br />El bloque XXXXXX no existe</dt>
+					<dd>
+						El bloque XXXXXX que se intentó usar no está definido en la plantilla.
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Escriba un nombre de bloque existente como argumento del método <code>usar()</code>
+						</dd>
+					</dd>
+					<dt>usar()<br />El bloque XXXXXX pertenece a otro (YYYYYY) que no está en uso.</dt>
+					<dd>
+						El bloque que intenta usar se encuentra dentro de otro que no está en uso.
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Antes de intentar usar un bloque dentro de otro (anidado), primero debe usar el bloque 'padre', es decir, aquel que contiene al que desea usar.
+						</dd>
+					</dd>
+					<dt>asignar()<br />Faltan variables a asignar o la lista no es un arreglo</dt>
+					<dd>
+						Se ha omitido el argumento principal para el método <code>asignar()</code> o el argumento no es un arreglo válido.
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							Escribe un arreglo asociativo o el nombre de una variable de este tipo, como argumento del método <code>asignar()</code>
+						</dd>
+					</dd>
+					<dt>asignar()<br />El bloque XXXXXX no está en uso</dt>
+					<dd>
+						<dd>Se intentó asignar valores a un grupo de variables de un bloque que no está siendo utilizado.</dd>
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Si deseas utilizar el bloque, primero ejecuta el método <code>usar()</code> antes de asignar valores a sus variables.
+						</dd>
+					</dd>
+					<dt>asignar()<br />El bloque XXXXXX es de asignación, utilice el método cargar()</dt>
+					<dd>
+						Se intentó asignar un valor a un bloque de asignación con el método incorrecto. El método <code>asignar()</code> sólo debe usarse para asignar valores a variables, para asignar valores a un bloque de asignación utiliza el método <code>cargar()</code>
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Utiliza el método correcto.
+						</dd>
+					</dd>
+					<dt>cargar()<br />Faltan argumento(s) de función</dt>
+					<dd>
+						Se intentó ejecutar el método sin argumentos.
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Utiliza el método <code>cargar()</code> con los argumentos válidos.
+						</dd>
+					</dd>
+					<dt>cargar()<br />No existe el bloque XXXXXX</dt>
+					<dd>
+						El bloque XXXXXX que se intentó cargar, no existe.
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Asegúrate de que el bloque a cargar está definido en la plantilla y de que escribes su nombre tal como fue definido.
+						</dd>
+					</dd>
+					<dt>cargar()<br />El bloque XXXXXX no es un bloque dinámico</dt>
+					<dd>
+						Se intentó cargar un bloque fijo. El método <code>cargar()</code> solo puede usarse paara bloques dinámicos o de asignación.
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Utiliza el método <code>cargar()</code> con bloques de asignación (BASG)
+							<br />Si deseas utilizar un bloque fijo (BINI ... BFIN) emplea el método <code>usar()</code>
+						</dd>
+					</dd>
+					<dt>Intérprete (Parser)<br />Etiqueta duplicada -iniciaBloque: XXXXXX Plantilla YYYYYY - Línea n</dt>
+					<dd>
+						Se detectó una etiqueta duplicada (XXXXXX) al inicio de bloque, en la línea n de la plantilla YYYYYY
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Revisa la plantilla señalada y renombra una de los bloques que tienen la misma etiqueta.
+						</dd>
+					</dd>
+					<dt>Intérprete (Parser)<br />Error estructura de bloque -inicia/terminaBloque: XXXXXX Plantilla YYYYYY - Línea n</dt>
+					<dd>
+						Se detectó que el bloque XXXXXX está mal estructurado o no coincide la etiqueta inicial con la final.
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Corrige el bloque en el documento de plantilla señalado.
+						</dd>
+					</dd>
+					<dt>Intérprete (Parser)<br />Etiqueta duplicada -asignaBloque: XXXXXX Plantilla YYYYYY - Línea n</dt>
+					<dd>
+						Se detectó una etiqueta duplicada en un bloque de asignación (XXXXXX), en la línea n de la plantilla YYYYYY
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Revisa la plantilla señalada y renombra una de los bloques que tienen la misma etiqueta.
+						</dd>
+					</dd>
+					<dt>Intérprete (Parser)<br />Documento no encontrado -insertaBloque: XXXXXX Plantilla YYYYYY - Línea n</dt>
+					<dd>
+						Se detectó que no existe el documento referenciado en el bloque de inclusión XXXXXX, de la plantilla YYYYYY, línea n.
+						<dd>
+							<strong class="rojo">Acción:</strong>
+							<br />Revisa la plantilla señalada y asegúrate de que el documento en referencia existe o está correctamente nombrado.
+						</dd>
+					</dd>
+				</dl>
+			</div></div>
+			<div class="colsep"></div>
+		</div>
+		
+		<div id="contacto">
+			<div class="colizq"><div class="colcon">Contacto</div></div>
+			<div class="colder"><div class="colcon">
+				Para contactarme escribe a la dirección de correo electrónico <a href="mailto:leonardomontilla@itc.com.ve">leonardomontilla@itc.com.ve</a> o bien ingresa al sitio web <a href="http://www.itc.com.ve/">www.itc.com.ve</a>.
+        <p>&nbsp;</p>
+			</div></div>
+			<div class="colsep"></div>
+		</div>
+		
+		<div id="barrabot">
+			<strong>motorPlantilla v2.x @ 2007 | Leonardo Montilla G. | http://www.itc.com.ve</strong>
+		</div>
+		
+	</div>
+</body>
+</html>

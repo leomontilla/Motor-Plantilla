@@ -1,0 +1,31 @@
+/******************************************************************************
+ *
+ * motorPlantilla v2.1.1
+ * clase motor de plantillas
+ * (a) 2004-2010 Leonardo Montilla G. <leonardomontilla@itc.com.ve>
+ * distribuido bajo licencia GNU GPL v3
+ *
+/******************************************************************************
+
+DESCRIPCION
+...............................................................................
+motorPlantilla es un intérprete de plantillas HTML, que permite separar la
+presentación del código.
+
+VERSION
+...............................................................................
+motorPlantilla v2.1.1
+Versión para PHP 5.x o superior.
+
+LICENCIA
+...............................................................................
+motorPlantilla es software libre bajo los términos de la Licencia Pública
+General GPL v3.
+
+INSTALACION
+...............................................................................
+Solo copie el archivo "class.motorPlantilla.php" a un subdirectorio del servidor.
+
+DOCUMENTACION
+...............................................................................
+Consulte el manual "guia.motoePlantilla.html" y los archivos de ejemplo.
